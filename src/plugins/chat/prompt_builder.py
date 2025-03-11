@@ -38,7 +38,7 @@ class PromptBuilder:
         # Self
         self_memory_prompt = ''
             
-        self_memory_prompt = f"你是{global_config.BOT_NICKNAME}，{memory_items[0]}"
+        self_memory_prompt = f"你是{global_config.BOT_NICKNAME}"
         # あなたの記憶
         sender_memory_prompt = ''
         relevant_memories = await hippocampus.get_relevant_memories(
