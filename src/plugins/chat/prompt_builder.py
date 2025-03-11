@@ -45,7 +45,7 @@ class PromptBuilder:
             max_memory_num=5
         )
         if relevant_memories:
-            sender_memory_prompt = "关于「{sender_name}」的记忆：{memory['content']}"
+            sender_memory_prompt = f"关于「{sender_name}」的记忆：{memory['content']}"
         else:
             sender_memory_prompt = '你和他不太熟悉，或者你忘记了和他有关的记忆'
 
