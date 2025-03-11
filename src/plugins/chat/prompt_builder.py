@@ -64,7 +64,7 @@ class PromptBuilder:
             print(f'{sender_name}这货不熟')
 
         #先禁用关系
-        if relationship_value > 240:
+        if relationship_value > 1000:
             relation_prompt = "你们是恋人关系，你非常爱他"
             relation_prompt_2 = "用亲密的语气回复"
         elif relationship_value > 100:
