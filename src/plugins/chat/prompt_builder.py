@@ -45,9 +45,20 @@ class PromptBuilder:
             max_memory_num=5
         )
         if relevant_memories:
-            sender_memory_prompt = f"关于「{sender_name}」的记忆：{memory['content']}"
+            # 格式化记忆内容
+            memory_items = []
+            for memory in relevant_memories:
+                memory_items.append(f"关于「{sender_name}」的记忆：{memory['content']}")
+            
+            sender_memory_prompt = "看到这个人，你想起来：\n" + "\n".join(memory_items) + "\n"
+            
+            # 打印调试信息
+            print("\n\033[1;32m[记忆检索]\033[0m 找到以下相关记忆：")
+            for memory in relevant_memories:
+                print(f"- 主题「{memory['topic']}」[相似度: {memory['similarity']:.2f}]: {memory['content']}")
         else:
             sender_memory_prompt = '你和他不太熟悉，或者你忘记了和他有关的记忆'
+            print(f'{sender_name}这货不熟')
 
         #先禁用关系
         if relationship_value > 240:

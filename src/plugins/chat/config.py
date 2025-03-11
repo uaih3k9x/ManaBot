@@ -27,9 +27,9 @@ class BotConfig:
     talk_frequency_down_groups = set()
     thinking_timeout: int = 100  # 思考时间
     
-    response_willing_amplifier: float = 1.0  # 回复意愿放大系数
-    response_interested_rate_amplifier: float = 1.0  # 回复兴趣度放大系数
-    down_frequency_rate: float = 3.5  # 降低回复频率的群组回复意愿降低系数
+    response_willing_amplifier: float = 1.5  # 回复意愿放大系数
+    response_interested_rate_amplifier: float = 1.5  # 回复兴趣度放大系数
+    down_frequency_rate: float = 2.5  # 降低回复频率的群组回复意愿降低系数
     
     ban_user_id = set()
     
@@ -39,7 +39,7 @@ class BotConfig:
     EMOJI_REGISTER_INTERVAL: int = 10  # 表情包注册间隔（分钟）
     EMOJI_SAVE: bool = True  # 偷表情包
     EMOJI_CHECK: bool = False #是否开启过滤
-    EMOJI_CHECK_PROMPT: str = "符合公序良俗" # 表情包过滤要求
+    EMOJI_CHECK_PROMPT: str = "不允许出现色情、暴力、赌博、毒品、政治等敏感内容" # 表情包过滤要求
 
     ban_words = set()
 
