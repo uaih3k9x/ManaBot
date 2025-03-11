@@ -33,10 +33,25 @@ class PromptBuilder:
             
         Returns:
             str: 构建好的prompt
-        """        
+
+        """   
+        # あなたの記憶
+        sender_memory_prompt = ''
+        start_time = time.time()
+        relevant_memories = await hippocampus.get_relevant_memories(
+            text=sender_name,
+            max_topics=5,
+            similarity_threshold=0.4,
+            max_memory_num=5
+        )
+        if relevant_memories:
+            sender_memory_prompt = "关于「{sender_name}」的记忆：{memory['content']}"
+        else:
+            sender_memory_prompt = '你和他不太熟悉，或者你忘记了和他有关的记忆'
+
         #先禁用关系
         if 0 > 30:
-            relation_prompt = "关系特别特别好，你很喜欢喜欢他"
+            relation_prompt = "关系特别特别好，你很喜欢他"
             relation_prompt_2 = "热情发言或者回复"
         elif 0 <-20:
             relation_prompt = "关系很差，你很讨厌他"
@@ -158,7 +173,7 @@ class PromptBuilder:
         if random.random() < 0.02:
             prompt_ger += '你喜欢用反问句'
         if random.random() < 0.01:
-            prompt_ger += '你喜欢用文言文'
+            prompt_ger += '你喜欢说日文'
         
         #额外信息要求
         extra_info = '''但是记得回复平淡一些，简短一些，尤其注意在没明确提到时不要过多提及自身的背景, 不要直接回复别人发的表情包，记住不要输出多余内容(包括前后缀，冒号和引号，括号，表情等)，只需要输出回复内容就好，不要输出其他任何内容''' 
@@ -171,9 +186,11 @@ class PromptBuilder:
         prompt += f"{prompt_personality}\n"
         prompt += f"{prompt_ger}\n"
         prompt += f"{extra_info}\n"    
+        prompt += f"{memory_prompt}\n"
+        prompt += f"{sender_memory_prompt}\n"
         
         '''读空气prompt处理''' 
-        activate_prompt_check=f"以上是群里正在进行的聊天，昵称为 '{sender_name}' 的用户说的:{message_txt}。引起了你的注意,你和他{relation_prompt}，你想要{relation_prompt_2}，但是这不一定是合适的时机，请你决定是否要回应这条消息。"     
+            activate_prompt_check=f"以上是群里正在进行的聊天，昵称为 '{sender_name}' 的用户说的:{message_txt}。引起了你的注意,你和他{relation_prompt}，你想要{relation_prompt_2}，但是这不一定是合适的时机，请你决定是否要回应这条消息。如果你在忙自己的事情，请不要回复，如果你在睡觉，也不要回复"     
         prompt_personality_check = ''
         extra_check_info=f"请注意把握群里的聊天内容的基础上，综合群内的氛围，例如，和{global_config.BOT_NICKNAME}相关的话题要积极回复,如果是at自己的消息一定要回复，如果自己正在和别人聊天一定要回复，其他话题如果合适搭话也可以回复，如果认为应该回复请输出yes，否则输出no，请注意是决定是否需要回复，而不是编写回复内容，除了yes和no不要输出任何回复内容。"
         if personality_choice < probability_1:  # 第一种人格
