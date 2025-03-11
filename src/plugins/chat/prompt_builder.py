@@ -35,9 +35,12 @@ class PromptBuilder:
             str: 构建好的prompt
 
         """   
+        # Self
+        self_memory_prompt = ''
+            
+        self_memory_prompt = f"你是{global_config.BOT_NICKNAME}，{memory_items[0]}"
         # あなたの記憶
         sender_memory_prompt = ''
-        start_time = time.time()
         relevant_memories = await hippocampus.get_relevant_memories(
             text=sender_name,
             max_topics=5,
@@ -197,6 +200,7 @@ class PromptBuilder:
         
         #合并prompt
         prompt = ""
+        prompt += f"{self_memory_prompt}\n"
         prompt += f"{prompt_info}\n"
         prompt += f"{prompt_date}\n"
         prompt += f"{chat_talking_prompt}\n"  
