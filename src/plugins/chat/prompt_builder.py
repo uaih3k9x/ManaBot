@@ -50,15 +50,21 @@ class PromptBuilder:
             sender_memory_prompt = '你和他不太熟悉，或者你忘记了和他有关的记忆'
 
         #先禁用关系
-        if 0 > 30:
-            relation_prompt = "关系特别特别好，你很喜欢他"
+        if relationship_value > 240:
+            relation_prompt = "你们是恋人关系，你非常爱他"
+            relation_prompt_2 = "用亲密的语气回复"
+        elif relationship_value > 100:
+            relation_prompt = "你对他有一些好感"
+            relation_prompt_2 = "用友好的语气回复"
+        elif relationship_value > 30:
+            relation_prompt = "关系好，你很喜欢他"
             relation_prompt_2 = "热情发言或者回复"
-        elif 0 <-20:
-            relation_prompt = "关系很差，你很讨厌他"
+        elif relationship_value < -50:
+            relation_prompt = "关系差，你很讨厌他"
             relation_prompt_2 = "骂他"
         else:
             relation_prompt = "关系一般"
-            relation_prompt_2 = "发言或者回复"
+            relation_prompt_2 = "正常发言或者回复"
         
         #开始构建prompt
         
@@ -190,7 +196,7 @@ class PromptBuilder:
         prompt += f"{sender_memory_prompt}\n"
         
         '''读空气prompt处理''' 
-            activate_prompt_check=f"以上是群里正在进行的聊天，昵称为 '{sender_name}' 的用户说的:{message_txt}。引起了你的注意,你和他{relation_prompt}，你想要{relation_prompt_2}，但是这不一定是合适的时机，请你决定是否要回应这条消息。如果你在忙自己的事情，请不要回复，如果你在睡觉，也不要回复"     
+        activate_prompt_check=f"以上是群里正在进行的聊天，昵称为 '{sender_name}' 的用户说的:{message_txt}。引起了你的注意,你和他{relation_prompt}，你想要{relation_prompt_2}，但是这不一定是合适的时机，请你决定是否要回应这条消息。如果你在忙自己的事情，请不要回复，如果你在睡觉，也不要回复"     
         prompt_personality_check = ''
         extra_check_info=f"请注意把握群里的聊天内容的基础上，综合群内的氛围，例如，和{global_config.BOT_NICKNAME}相关的话题要积极回复,如果是at自己的消息一定要回复，如果自己正在和别人聊天一定要回复，其他话题如果合适搭话也可以回复，如果认为应该回复请输出yes，否则输出no，请注意是决定是否需要回复，而不是编写回复内容，除了yes和no不要输出任何回复内容。"
         if personality_choice < probability_1:  # 第一种人格
