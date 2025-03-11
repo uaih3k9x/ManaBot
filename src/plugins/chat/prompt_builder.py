@@ -55,10 +55,10 @@ class PromptBuilder:
             relation_prompt_2 = "用亲密的语气回复"
         elif relationship_value > 100:
             relation_prompt = "你对他有一些好感"
-            relation_prompt_2 = "用友好的语气回复"
+            relation_prompt_2 = "用热情的语气回复"
         elif relationship_value > 30:
-            relation_prompt = "关系好，你很喜欢他"
-            relation_prompt_2 = "热情发言或者回复"
+            relation_prompt = "关系好"
+            relation_prompt_2 = "比较热情发言或者回复"
         elif relationship_value < -50:
             relation_prompt = "关系差，你很讨厌他"
             relation_prompt_2 = "骂他"
