@@ -251,6 +251,9 @@ class PromptBuilder:
         personality=global_config.PROMPT_PERSONALITY
         prompt_personality = ''
         personality_choice = random.random()
+        probability_1 = global_config.PERSONALITY_1
+        probability_2 = global_config.PERSONALITY_2
+        probability_3 = global_config.PERSONALITY_3
         if personality_choice < probability_1:  # 第一种人格
             prompt_personality = f'''{activate_prompt}你的网名叫{global_config.BOT_NICKNAME}，{personality[0]}'''
         elif personality_choice < probability_1 + probability_2:  # 第二种人格
