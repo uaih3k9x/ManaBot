@@ -21,7 +21,7 @@ class BotConfig:
     MAX_CONTEXT_SIZE: int = 15  # 上下文最大消息数
     emoji_chance: float = 0.2  # 发送表情包的基础概率
     allow_intimate_relationship: bool = True  # 是否允许亲密关系
-    allow_intimate_relationship_who: list = []  # 允许亲密关系的人
+    allow_intimate_relationship_who: list = field(default_factory=list)  # 允许亲密关系的人
     
 
     ENABLE_PIC_TRANSLATE: bool = True  # 是否启用图片翻译
