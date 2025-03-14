@@ -20,12 +20,15 @@ class BotConfig:
     MIN_TEXT_LENGTH: int = 2  # 最小处理文本长度
     MAX_CONTEXT_SIZE: int = 15  # 上下文最大消息数
     emoji_chance: float = 0.2  # 发送表情包的基础概率
+    allow_intimate_relationship: bool = True  # 是否允许亲密关系
+    allow_intimate_relationship_who: list = []  # 允许亲密关系的人
     
+
     ENABLE_PIC_TRANSLATE: bool = True  # 是否启用图片翻译
     
     talk_allowed_groups = set()
     talk_frequency_down_groups = set()
-    thinking_timeout: int = 100  # 思考时间
+    thinking_timeout: int = 60  # 思考时间
     
     response_willing_amplifier: float = 1.5  # 回复意愿放大系数
     response_interested_rate_amplifier: float = 1.5  # 回复兴趣度放大系数
@@ -307,6 +310,8 @@ class BotConfig:
             others_config = parent["others"]
             config.enable_advance_output = others_config.get("enable_advance_output", config.enable_advance_output)
             config.enable_kuuki_read = others_config.get("enable_kuuki_read", config.enable_kuuki_read)
+            config.allow_intimate_relationship = others_config.get("allow_intimate_relationship", config.allow_intimate_relationship)
+            config.allow_intimate_relationship_who = others_config.get("allow_intimate_relationship_who", config.allow_intimate_relationship_who) # 允许亲密关系的人
 
         # 版本表达式：>=1.0.0,<2.0.0
         # 允许字段：func: method, support: str, notice: str, necessary: bool

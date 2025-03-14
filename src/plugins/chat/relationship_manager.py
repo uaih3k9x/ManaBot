@@ -2,6 +2,7 @@ import asyncio
 from typing import Optional
 
 from ...common.database import Database
+from .config import global_config
 
 
 class Impression:
@@ -141,7 +142,12 @@ class RelationshipManager:
         """
         user_id = relationship.user_id
         nickname = relationship.nickname
+        if relationship.relationship_value > 900 or not global_config.allow_intimate_relationship or user_id not in global_config.allow_intimate_relationship_who:
+            relationship.relationship_value = 900  # 如果不在亲密关系中，将关系值限制在900
         relationship_value = relationship.relationship_value
+        # 从配置文件加载亲密关系设置
+        
+        # 检查是否在亲密关系中
         gender = relationship.gender
         age = relationship.age
         saved = relationship.saved
