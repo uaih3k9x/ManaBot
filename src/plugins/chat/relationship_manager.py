@@ -143,7 +143,7 @@ class RelationshipManager:
         user_id = relationship.user_id
         nickname = relationship.nickname
         if relationship.relationship_value > 900:
-            if not global_config.allow_intimate_relationship or user_id not in global_config.allow_intimate_relationship_who:
+            if not global_config.allow_intimate_relationship or str(user_id) not in global_config.allow_intimate_relationship_who:
                 relationship.relationship_value = 900  # 如果不在亲密关系中，将关系值限制在900
         relationship_value = relationship.relationship_value
         
