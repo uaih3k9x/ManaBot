@@ -295,11 +295,22 @@ class ChineseTypoGenerator:
         # 分词
         words = self._segment_sentence(sentence)
         
-        for word in words:
+        i = 0
+        while i < len(words):
+            word = words[i]
+            
+            # 检查是否为省略号
+            if word == "..." or word == "…" or word == ".....":
+                result.append(word)
+                current_pos += len(word)
+                i += 1
+                continue
+                
             # 如果是标点符号或空格，直接添加
             if all(not self._is_chinese_char(c) for c in word):
                 result.append(word)
                 current_pos += len(word)
+                i += 1
                 continue
                 
             # 获取词语的拼音
@@ -322,6 +333,7 @@ class ChineseTypoGenerator:
                                     orig_freq, typo_freq))
                     word_typos.append((typo_word, word))  # 记录(错词,正确词)对
                     current_pos += len(typo_word)
+                    i += 1
                     continue
             
             # 如果不进行整词替换，则进行单字替换
@@ -341,9 +353,11 @@ class ChineseTypoGenerator:
                             typo_info.append((char, typo_char, py, typo_py, orig_freq, typo_freq))
                             char_typos.append((typo_char, char))  # 记录(错字,正确字)对
                             current_pos += 1
+                            i += 1
                             continue
                 result.append(char)
                 current_pos += 1
+                i += 1
             else:
                 # 处理多字词的单字替换
                 word_result = []
@@ -368,6 +382,7 @@ class ChineseTypoGenerator:
                     word_result.append(char)
                 result.append(''.join(word_result))
                 current_pos += len(word)
+                i += 1
         
         # 优先从词语错误中选择，如果没有则从单字错误中选择
         correction_suggestion = None
