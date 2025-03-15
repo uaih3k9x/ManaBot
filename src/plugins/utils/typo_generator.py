@@ -295,16 +295,7 @@ class ChineseTypoGenerator:
         # 分词
         words = self._segment_sentence(sentence)
         
-        i = 0
-        while i < len(words):
-            word = words[i]
-            
-            # 检查是否为省略号
-            if word == "..." or word == "…" or word == ".....":
-                result.append(word)
-                current_pos += len(word)
-                continue
-                
+        for word in words:
             # 如果是标点符号或空格，直接添加
             if all(not self._is_chinese_char(c) for c in word):
                 result.append(word)

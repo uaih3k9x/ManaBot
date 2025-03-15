@@ -30,8 +30,8 @@ class BotConfig:
     talk_frequency_down_groups = set()
     thinking_timeout: int = 120  # 思考时间
     
-    response_willing_amplifier: float = 1.1  # 回复意愿放大系数
-    response_interested_rate_amplifier: float = 1.0  # 回复兴趣度放大系数
+    response_willing_amplifier: float = 0.8  # 回复意愿放大系数
+    response_interested_rate_amplifier: float = 0.8  # 回复兴趣度放大系数
     down_frequency_rate: float = 2.5  # 降低回复频率的群组回复意愿降低系数
     
     ban_user_id = set()
@@ -67,7 +67,7 @@ class BotConfig:
     enable_advance_output: bool = False  # 是否启用高级输出
     enable_kuuki_read: bool = True # 是否启用读空气功能
     
-    mood_update_interval: float = 3.0 # 情绪更新间隔 单位秒
+    mood_update_interval: float = 1.0 # 情绪更新间隔 单位秒
     mood_decay_rate: float = 0.95 # 情绪衰减率
     mood_intensity_factor: float = 0.7 # 情绪强度因子
 
