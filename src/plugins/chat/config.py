@@ -28,7 +28,7 @@ class BotConfig:
     
     talk_allowed_groups = set()
     talk_frequency_down_groups = set()
-    thinking_timeout: int = 60  # 思考时间
+    thinking_timeout: int = 120  # 思考时间
     
     response_willing_amplifier: float = 1.1  # 回复意愿放大系数
     response_interested_rate_amplifier: float = 1.0  # 回复兴趣度放大系数
