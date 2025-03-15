@@ -252,7 +252,7 @@ def split_into_sentences_w_remove_punctuation(text: str) -> List[str]:
             # print(f"当前字符: {letter}, 随机数: {random.random()}")
             if random.random() < split_strength:
                 letter = ''
-        if letter in ['。', '…']:
+        if letter in ['。']:
             # print(f"当前字符: {letter}, 随机数: {random.random()}")
             if random.random() < 1 - split_strength:
                 letter = ''
