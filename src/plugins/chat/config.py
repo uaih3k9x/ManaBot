@@ -362,7 +362,7 @@ class BotConfig:
             },
             "chinese_typo": {
                 "func": chinese_typo,
-                "support": ">=0.0.3",
+                "support": ">=0.0.0",
                 "necessary": False
             },
             "groups": {
