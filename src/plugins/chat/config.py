@@ -87,9 +87,9 @@ class BotConfig:
     ]
     PROMPT_SCHEDULE_GEN="一个曾经学习地质,现在学习心理学和脑科学的女大学生，喜欢刷qq，贴吧，知乎和小红书"
     
-    PERSONALITY_1: float = 0.6 # 第一种人格概率
-    PERSONALITY_2: float = 0.3 # 第二种人格概率
-    PERSONALITY_3: float = 0.1 # 第三种人格概率
+    PERSONALITY_1: float = 0.8 # 第一种人格概率
+    PERSONALITY_2: float = 0.19 # 第二种人格概率
+    PERSONALITY_3: float = 0.01 # 第三种人格概率
     
     @staticmethod
     def get_config_dir() -> str:
