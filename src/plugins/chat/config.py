@@ -30,8 +30,8 @@ class BotConfig:
     talk_frequency_down_groups = set()
     thinking_timeout: int = 120  # 思考时间
     
-    response_willing_amplifier: float = 0.8  # 回复意愿放大系数
-    response_interested_rate_amplifier: float = 0.8  # 回复兴趣度放大系数
+    response_willing_amplifier: float = 1.1  # 回复意愿放大系数
+    response_interested_rate_amplifier: float = 1.1  # 回复兴趣度放大系数
     down_frequency_rate: float = 2.5  # 降低回复频率的群组回复意愿降低系数
     
     ban_user_id = set()
