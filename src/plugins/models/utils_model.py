@@ -215,10 +215,11 @@ class LLM_request:
                                         logger.error(f"解析流式输出错误: {e}")
                             content = accumulated_content
                             reasoning_content = ""
-                            think_match = re.search(r'<think>(.*?)</think>', content, re.DOTALL)
-                            if think_match:
-                                reasoning_content = think_match.group(1).strip()
-                            content = re.sub(r'<think>.*?</think>', '', content, flags=re.DOTALL).strip()
+                            match = re.search(r"(?:<think>)?(.*?)</think>", content, re.DOTALL)
+                            content = re.sub(r"(?:<think>)?.*?</think>", "", content, flags=re.DOTALL, count=1).strip()
+                            if match:
+                                reasoning = match.group(1).strip()
+                                reasoning_content = match.group(1).strip()
                             # 构造一个伪result以便调用自定义响应处理器或默认处理器
                             result = {"choices": [{"message": {"content": content, "reasoning_content": reasoning_content}}]}
                             return response_handler(result) if response_handler else self._default_response_handler(result, user_id, request_type, endpoint)
