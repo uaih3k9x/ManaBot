@@ -214,6 +214,7 @@ class LLM_request:
                                     except Exception as e:
                                         logger.error(f"解析流式输出错误: {e}")
                             content = accumulated_content
+                            print("content-full",content)
                             reasoning_content = ""
                             match = re.search(r"(?:<think>)?(.*?)</think>", content, re.DOTALL)
                             content = re.sub(r"(?:<think>)?.*?</think>", "", content, flags=re.DOTALL, count=1).strip()
