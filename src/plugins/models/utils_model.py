@@ -324,9 +324,10 @@ class LLM_request:
         return "没有返回结果", ""
 
     def _extract_reasoning(self, content: str) -> tuple[str, str]:
+        print("content",content)
         """CoT思维链提取"""
-        match = re.search(r'(?:<think>)?(.*?)</think>', content, re.DOTALL)
-        content = re.sub(r'(?:<think>)?.*?</think>', '', content, flags=re.DOTALL, count=1).strip()
+        match = re.search(r"(?:<think>)?(.*?)</think>", content, re.DOTALL)
+        content = re.sub(r"(?:<think>)?.*?</think>", "", content, flags=re.DOTALL, count=1).strip()
         if match:
             reasoning = match.group(1).strip()
         else:

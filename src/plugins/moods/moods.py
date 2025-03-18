@@ -4,6 +4,7 @@ import time
 from dataclasses import dataclass
 
 from ..chat.config import global_config
+from ..chat.relationship_manager import relationship_manager
 
 
 @dataclass
@@ -175,7 +176,13 @@ class MoodManager:
         """根据用户ID更新情绪状态"""
         
         # 这里可以根据用户ID添加特定的权重或规则
-        weight = 1.0  # 默认权重
+        # 获取用户关系值
+        user_id = int(user_id)
+        relationship_value = relationship_manager.get_relationship_value(user_id)
+        if relationship_value > 1000:
+            weight = 2.0
+        else:
+            weight = 1.0
         
         self.current_mood.valence += valence_change * weight
         self.current_mood.arousal += arousal_change * weight
